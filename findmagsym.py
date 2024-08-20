@@ -199,8 +199,8 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 		sst = {'SST-1':'antiferromanget (no NRSS, no RSS)',\
 			'SST-2':'antiferromagnet (no NRSS, no RSS)',\
 			'SST-3':'antiferromagnet (no NRSS, yes RSS)',\
-			'SST-4x':"NRSS antiferromagnet ($\Gamma$ degenerate)",\
-			'SST-4y':"NRSS antiferromagnet ($\Gamma$ split)",\
+			'SST-4x':"NRSS antiferromagnet ($\Gamma$-degenerate)",\
+			'SST-4y':"NRSS antiferromagnet ($\Gamma$-split)",\
 			'SST-5':"ferromagnet or ferrimagnet",\
 			'SST-6':"centerosymmetric nonmagent",\
 			'SST-7':"non-centrosymmetric nonmagnet"}

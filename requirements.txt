@@ -2,5 +2,5 @@ streamlit==1.37.1
 spglib==2.5.0
 spinspg==0.1.2
 pymatgen==2023.9.25
-numpy==1.21.6
+numpy==1.22.1
 pandas==1.4.4

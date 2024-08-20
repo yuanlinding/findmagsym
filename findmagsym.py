@@ -162,7 +162,7 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 		msg_wo_soc = find2_msg_wo_soc(mcif_file)
 		bns_symbol = df.loc[df['BNS_NUM']==msg_wo_soc.bns_number].iloc[0]['BNS_SYM']
 		st.markdown('''**MSG without SOC:**''')
-		st.write(f"{bns_symbol} (BNS);   MSG Type {msg_wo_soc.type}")
+		st.markdown(f"${bns_symbol}$ (BNS);   MSG Type {msg_wo_soc.type}")
 		#st.write(msg_wo_soc)
 		msg_symm = get_magnetic_symmetry_from_database(msg_wo_soc.uni_number)
 		with st.container(height=300):
@@ -172,7 +172,7 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 		msg_w_soc = find2_msg_w_soc(mcif_file)
 		bns_symbol = df.loc[df['BNS_NUM']==msg_w_soc.bns_number].iloc[0]['BNS_SYM']
 		st.markdown("**MSG with SOC**")
-		st.write(f"{bns_symbol} (BNS);   MSG Type {msg_w_soc.type}")
+		st.markdown(f"${bns_symbol}$ (BNS);   MSG Type {msg_w_soc.type}")
 		msg_symm = get_magnetic_symmetry_from_database(msg_wo_soc.uni_number)
 		with st.container(height=300):
 			st.write(msg_symm)

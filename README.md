@@ -1,19 +1,5 @@
-# 🎈 Blank app template
+# 🎈 FINDMAGSYM
 
-A simple Streamlit app template for you to modify!
+A Streamlit app used to find the magnetic space group symmetry with and without spin-orbit coupling of a magnetic crystal given its crystal and magnetic structure in **mcif** format. This information is further used to identify the spin splitting behavior of the material.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
-
-### How to run it on your own machine
-
-1. Install the requirements
-
-   ```
-   $ pip install -r requirements.txt
-   ```
-
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+### How to run i

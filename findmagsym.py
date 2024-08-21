@@ -204,10 +204,15 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 			'SST-5':"ferromagnet or ferrimagnet",\
 			'SST-6':"centerosymmetric nonmagent",\
 			'SST-7':"non-centrosymmetric nonmagnet"}
-		if sst_key in ['SST-4x','SST-4y']:
-			st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[{sst[sst_key]}] :red[(SST-4)]")
-		else:
-			st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[{sst[sst_key]}] :red[({sst_key})]")
+		if str(sog.spin_only_group_type) == "COLLINEAR":
+			if sst_key in ['SST-4x','SST-4y']:
+				st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[{sst[sst_key]}] :red[(SST-4)]")
+			else:
+				st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[{sst[sst_key]}] :red[({sst_key})]")
+		elif is_compensated_mag(magmoms):
+			st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[antiferromagnet]")
+   		else:
+     			st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[ferromagnet or ferrimagnet]")
 
 if __name__ == "__main__":
 	main()

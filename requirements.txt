@@ -4,4 +4,3 @@ pymatgen==2024.8.9
 spglib==2.5.0
 spinspg==0.1.2
 streamlit==1.37.1
-streamlit-iframe-auto-resize

@@ -208,7 +208,6 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 			st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[{sst[sst_key]}] :red[(SST-4)]")
 		else:
 			st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[{sst[sst_key]}] :red[({sst_key})]")
-	st_iframe_autoresize("https://findmagsym.streamlit.app")
 
 if __name__ == "__main__":
 	main()

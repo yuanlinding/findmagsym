@@ -2,7 +2,7 @@ import streamlit as st
 
 st.header("INPUT")
 inp ='''
-A MCIF format structure file. The MCIF file is an extended CIF format structure file which in addition of common CIF tags there are tags containing magnetic space group and magnetic moment information. The MCIF file can be generated from CIF format structure file using [FINDSYM](https://iso.byu.edu/iso/findsym.php) or [STRCONVERT](https://cryst.ehu.es/cgi-bin/cryst/programs/mcif2vesta/index.php) program by supplying the magnetic moments at each individual sites mannually.
+A MCIF format structure file. The MCIF file is an extended CIF format structure file in which magnetic space group and magnetic moment information are added to describe magnetic material structure. Practially, the MCIF file can be generated from CIF format structure file using [FINDSYM](https://iso.byu.edu/iso/findsym.php) or [STRCONVERT](https://cryst.ehu.es/cgi-bin/cryst/programs/mcif2vesta/index.php) program by supplying the magnetic moments at each individual sites mannually.
 '''
 st.markdown(inp)
 

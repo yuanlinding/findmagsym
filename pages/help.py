@@ -12,7 +12,7 @@ Once a MICF format structure file in imported, the program will genearte the fol
 1. Identified magnetic space group without spin-orbit coupling (MSG without SOC) described by: 
     - MSG symbols given in [BNS setting](https://stokes.byu.edu/iso/magneticspacegroupshelp.php)  
     - MSG type  
-    - The set of space and time smmetries that preserves the crystal and its spin structure invariant without considering the spin orbit coupling, which means the spin and spatial space are decoupled. These symmetries include (i) proper and improper type crystal rotations represented by 3x3 matrixes; and (ii) translation symmetries represented by 1x3 matrixes; and (iii) time reversal symmetries by a list of 0 (absence) or 1 (presence) numbers.  
+    - The set of space and time smmetries that preserves the crystal and its spin structure invariant without considering the spin orbit coupling (such that the spin and spatial space are decoupled). These symmetries include (i) proper and improper type crystal rotations represented by 3x3 matrixes; and (ii) translation symmetries represented by 1x3 matrixes; and (iii) time reversal symmetries by a list of 0 (absence) or 1 (presence) numbers.  
 
 2. Identified magnetic space group with SOC described by: 
     - MSG symbols given in BNS setting  

@@ -15,7 +15,7 @@ Once a MICF format structure file in imported, the program will genearte the fol
     - The set of space and time smmetries that preserves the crystal and its spin structure invariant without considering the spin orbit coupling (such that the spin and spatial space are decoupled). These symmetries consist of three parts (i) proper and improper crystal rotations represented by 3x3 matrixes; and (ii) translations represented by 1x3 matrixes; and (iii) time reversal symmetries
  represented by a list of 0 (absence) or 1 (presence).  
 
-2. Identified magnetic space group with SOC described by: 
+2. Identified magnetic space group with SOC (MSG with SOC) described by: 
     - MSG symbols given in [BNS setting](https://stokes.byu.edu/iso/magneticspacegroupshelp.php)  
     - MSG type  
     - The set of space and time smmetries that preserves the crystal and its spin structure invariant considering the spin orbit coupling. These symmetries consist of three parts (i) proper and improper crystal rotations represented by 3x3 matrixes; and (ii) translations represented by 1x3 matrixes; and (iii) time reversal symmetries represented by a list of 0 (absence) or 1 (presence).  

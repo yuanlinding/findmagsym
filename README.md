@@ -26,4 +26,4 @@ Once a MICF format structure file in imported, the program will generate the fol
     - Spin splitting type (SST) following the definition of [Physcial Review Materials 5,014409 (2021)](https://journals.aps.org/prmaterials/abstract/10.1103/PhysRevMaterials.5.014409) 
 
 ## Citation
-Lin-Ding Yuan, Alexandru B. Georgescu, and James M. Rondinelli. Non-relativistic spin splitting in compensated magnets that are not altermagnets arXiv:2402.14321 (2024).
+Lin-Ding Yuan, Alexandru B. Georgescu, and James M. Rondinelli. Nonrelativistic Spin Splitting at the Brillouin Zone Center in Compensated Magnets, Phys. Rev. Lett. 133, 216701 (2024).

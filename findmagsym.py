@@ -175,7 +175,7 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 		bns_symbol = df.loc[df['BNS_NUM']==msg_w_soc.bns_number].iloc[0]['BNS_SYM']
 		st.markdown("**MSG with SOC**")
 		st.markdown(f"${bns_symbol}$ (BNS);   MSG Type {msg_w_soc.type}")
-		msg_symm = get_magnetic_symmetry_from_database(msg_wo_soc.uni_number)
+		msg_symm = get_magnetic_symmetry_from_database(msg_w_soc.uni_number)
 		with st.container(height=300):
 			st.write(msg_symm)
 

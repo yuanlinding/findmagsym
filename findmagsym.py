@@ -183,7 +183,7 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 		elif msg_wo_soc.type == 4 and has_ThetaI(mcif_file):
 			sst_key = "SST-2"
 		elif msg_wo_soc.type == 4 and not has_ThetaI(mcif_file):
-			sst_key = "SST-2"
+			sst_key = "SST-3"
 		elif msg_wo_soc.type == 3 and not has_ThetaI(mcif_file):
 			sst_key = "SST-4x"
 		elif msg_wo_soc.type == 1 and is_compensated_mag(magmoms):

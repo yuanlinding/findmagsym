@@ -213,7 +213,7 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 		elif is_compensated_mag(magmoms):
 			if sst_key in ['SST-6']:
 				st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[centrosymmetric] :red[({sst_key})]")
-			elif sst_key in ['SST-7']
+			elif sst_key in ['SST-7']:
 				st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[noncentrosymmetric] :red[({sst_key})]")
 			else:
 				st.markdown(f"This material is a :blue[{sog.spin_only_group_type}] :green[antiferromagnet]")

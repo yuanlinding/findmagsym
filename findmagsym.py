@@ -159,7 +159,8 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 		#st.write(f"Spin-only group: {sog}")
 		#st.write(f"{sog.spin_only_group_type} spin")
 
-		#MSG without SOC
+		#MSG without SOC 
+		#there are some bug when dealing with nonmangets
 		msg_wo_soc = find2_msg_wo_soc(mcif_file)
 		bns_symbol = df.loc[df['BNS_NUM']==msg_wo_soc.bns_number].iloc[0]['BNS_SYM']
 		st.markdown('''**MSG without SOC:**''')

@@ -142,7 +142,8 @@ def main():
 	multi ='''Version 1.1, Feb 2025  
 Linding Yuan, James Rondinelli, Department of Materials Science and Engineering, Northwestern University, Evanston, Illinois  60208, USA
 	'''
-	st.markdown("Version 1.0, Aug 2024")
+	#st.markdown("Version 1.0, Aug 2024")
+	st.markdown("Version 1.1, Feb 2025") #fixed some bugs with nonmagnet
 	st.markdown("**Description:** findmagsym is a tool to identify the magnetic space group (with and without spin-orbit coupling) of a magnetic crystal, given the positions and magnetic moments of the atoms in a unit cell.")
 	st.markdown("**How to cite:** Lin-Ding Yuan, Alexandru B. Georgescu, and James M. Rondinelli. *Nonrelativistic Spin Splitting at the Brillouin Zone Center in Compensated Magnets*, Phys. Rev. Lett. 133, 216701 (2024).")
 	st.page_link("pages/help.py",icon=":material/help:")

@@ -178,9 +178,9 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 		with st.container(height=300):
 			st.write(msg_symm)
 
-		if msg_w_soc.type == 2 and is_Centerosymmetric(mcif_file):
+		if msg_w_soc.type == 2 and is_Centrosymmetric(mcif_file):
 			sst_key = "SST-6"  
-		elif msg_w_soc.type == 2 and not is_Centerosymmetric(mcif_file):
+		elif msg_w_soc.type == 2 and not is_Centrosymmetric(mcif_file):
 			sst_key = "SST-7"  
 		elif msg_wo_soc.type == 3 and has_ThetaI(mcif_file):  
 			sst_key = "SST-1"

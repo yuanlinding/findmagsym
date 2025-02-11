@@ -104,7 +104,7 @@ def find2_msg_w_soc(mcif_file):
 	#st.write(f"MSG with SOC: {msg_w_soc}")
 	return msg_w_soc
 
-def is_Centrosymmetric(mcif):
+def is_Centrosymmetric(mcif_file):
 	lattice, positions, numbers, magmoms = read_mcif(mcif_file)
 	symmetry = get_symmetry((lattice, positions, numbers))
 	rots = symmetry['rotations']

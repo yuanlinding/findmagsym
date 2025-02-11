@@ -139,7 +139,7 @@ def is_compensated_mag(magmoms):
 
 def main():
 	st.title("FINDMAGSYM")
-	multi ='''Version 1.0, Aug 2024  
+	multi ='''Version 1.1, Feb 2025  
 Linding Yuan, James Rondinelli, Department of Materials Science and Engineering, Northwestern University, Evanston, Illinois  60208, USA
 	'''
 	st.markdown("Version 1.0, Aug 2024")

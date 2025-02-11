@@ -3,7 +3,7 @@ import pandas as pd
 from io import StringIO
 import numpy as np
 from numpy.linalg import det,norm
-from spglib import get_magnetic_symmetry, get_magnetic_spacegroup_type_from_symmetry, get_magnetic_symmetry_from_database
+from spglib import get_magnetic_symmetry, get_magnetic_spacegroup_type_from_symmetry, get_magnetic_symmetry_from_database, get_symmetry
 from spinspg import get_spin_symmetry
 from pymatgen.core import Structure
 
@@ -178,7 +178,11 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 		with st.container(height=300):
 			st.write(msg_symm)
 
-		if msg_wo_soc.type == 3 and has_ThetaI(mcif_file):  
+		if msg_w_soc.type == 2 and is_Centerosymmetric(mcif_file):
+			sst_key = "SST-6"  
+		elif msg_w_soc.type == 2 and not is_Centerosymmetric(mcif_file):
+			sst_key = "SST-7"  
+		elif msg_wo_soc.type == 3 and has_ThetaI(mcif_file):  
 			sst_key = "SST-1"
 		elif msg_wo_soc.type == 4 and has_ThetaI(mcif_file):
 			sst_key = "SST-2"
@@ -190,10 +194,6 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 			sst_key = "SST-4y"
 		elif msg_wo_soc.type == 1 and not is_compensated_mag(magmoms):
 			sst_key = "SST-5"
-		elif msg_wo_soc.type == 2 and is_Centerosymmetric(mcif_file):
-			sst_key = "SST-6"  
-		elif msg_wo_soc.type == 2 and not is_Centerosymmetric(mcif_file):
-			sst_key = "SST-7"  
 		else:
 			print("Unknown type!!!")
 		

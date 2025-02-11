@@ -170,7 +170,7 @@ Linding Yuan, James Rondinelli, Department of Materials Science and Engineering,
 			st.write(msg_symm)
 
 		#MSG with SOC
-		msg_w_soc = find2_msg_w_soc(mcif_file)
+		msg_w_soc = find_msg_w_soc(mcif_file)
 		bns_symbol = df.loc[df['BNS_NUM']==msg_w_soc.bns_number].iloc[0]['BNS_SYM']
 		st.markdown("**MSG with SOC**")
 		st.markdown(f"${bns_symbol}$ (BNS);   MSG Type {msg_w_soc.type}")

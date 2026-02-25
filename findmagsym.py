@@ -16,14 +16,20 @@ def read_mcif(mcif_file):
 		if hasattr(mcif_file, 'getvalue'):
 			bytes_data = mcif_file.getvalue()
 			if isinstance(bytes_data, bytes):
-				string_data = bytes_data.decode("utf-8")
+				try:
+					string_data = bytes_data.decode("utf-8")
+				except UnicodeDecodeError:
+					string_data = bytes_data.decode("latin-1")
 			else:
 				string_data = bytes_data
 		elif hasattr(mcif_file, 'read'):
 			# File-like object
 			content = mcif_file.read()
 			if isinstance(content, bytes):
-				string_data = content.decode("utf-8")
+				try:
+					string_data = content.decode("utf-8")
+				except UnicodeDecodeError:
+					string_data = content.decode("latin-1")
 			else:
 				string_data = content
 		else:

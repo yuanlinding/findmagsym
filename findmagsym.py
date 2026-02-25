@@ -10,13 +10,40 @@ from pymatgen.io.cif import CifParser
 
 
 def read_mcif(mcif_file):
-	stringio = StringIO(mcif_file.getvalue().decode("utf-8"))
-	string_data = stringio.read()
+	# Handle different file object types
+	try:
+		# Try reading as uploaded file object (Streamlit)
+		if hasattr(mcif_file, 'getvalue'):
+			bytes_data = mcif_file.getvalue()
+			if isinstance(bytes_data, bytes):
+				string_data = bytes_data.decode("utf-8")
+			else:
+				string_data = bytes_data
+		elif hasattr(mcif_file, 'read'):
+			# File-like object
+			content = mcif_file.read()
+			if isinstance(content, bytes):
+				string_data = content.decode("utf-8")
+			else:
+				string_data = content
+		else:
+			# Assume it's already a string
+			string_data = str(mcif_file)
+	except Exception as e:
+		raise ValueError(f"Could not read MCIF file: {e}")
+
 	stru = Structure.from_str(string_data,"cif")
 	lattice = stru.lattice.matrix
 	positions = stru.frac_coords
 	numbers = np.array(stru.atomic_numbers)
-	magmoms = np.array([list(stru.site_properties['magmom'][i].moment) for i in range(stru.num_sites)])
+
+	# Handle magnetic moments
+	if 'magmom' in stru.site_properties:
+		magmoms = np.array([list(stru.site_properties['magmom'][i].moment) for i in range(stru.num_sites)])
+	else:
+		# Fallback to zeros if no magnetic moments found
+		magmoms = np.zeros((stru.num_sites, 3))
+
 	return lattice, positions, numbers, magmoms
 
 def read_mcif2(mcif_file):

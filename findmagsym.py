@@ -10,50 +10,6 @@ from pymatgen.io.cif import CifParser
 
 
 def read_mcif(mcif_file):
-    # Read the uploaded Streamlit file object into a string first
-    string_data = mcif_file.getvalue().decode("utf-8")
-    
-    # Use from_str to parse the string variable with CifParser
-    parser = CifParser.from_str(string_data)
-    
-    # Extract the first structure
-    stru = parser.get_structures()[0]
-    
-    lattice = stru.lattice.matrix
-    positions = stru.frac_coords
-    numbers = np.array(stru.atomic_numbers)
-    
-    # Extract the raw dictionary to manually map magnetic moments
-    cif_dict = parser.as_dict()
-    data_block = list(cif_dict.values())[0] 
-    
-    # Locate the magnetic moment tags specific to .mcif files
-    if '_atom_site_moment.label' in data_block:
-        labels = data_block.get('_atom_site_moment.label', [])
-        mx = data_block.get('_atom_site_moment.crystalaxis_x', [])
-        my = data_block.get('_atom_site_moment.crystalaxis_y', [])
-        mz = data_block.get('_atom_site_moment.crystalaxis_z', [])
-        
-        # Create a mapping of atom labels to their [x, y, z] moments
-        mag_map = {}
-        for i in range(len(labels)):
-            mag_map[labels[i]] = [float(mx[i]), float(my[i]), float(mz[i])]
-            
-        # Assign the correct magnetic moment to each site in the structure
-        magmoms_list = []
-        for site in stru:
-            symbol = site.specie.symbol
-            # Default to [0.0, 0.0, 0.0] if no moment is specified for the atom
-            magmoms_list.append(mag_map.get(symbol, [0.0, 0.0, 0.0]))
-            
-        magmoms = np.array(magmoms_list)
-    else:
-        # Fallback array if no magnetic data exists
-        magmoms = np.zeros((len(stru), 3))
-        
-    return lattice, positions, numbers, magmoms
-
-def read_mcif2(mcif_file):
 	stringio = StringIO(mcif_file.getvalue().decode("utf-8"))
 	string_data = stringio.read()
 	stru = Structure.from_str(string_data,"cif")
@@ -62,6 +18,51 @@ def read_mcif2(mcif_file):
 	numbers = np.array(stru.atomic_numbers)
 	magmoms = np.array([list(stru.site_properties['magmom'][i].moment) for i in range(stru.num_sites)])
 	return lattice, positions, numbers, magmoms
+
+def read_mcif2(mcif_file):
+    # Alternative parser using CifParser with manual moment mapping
+    # Read the uploaded Streamlit file object into a string first
+    string_data = mcif_file.getvalue().decode("utf-8")
+
+    # Use from_str to parse the string variable with CifParser
+    parser = CifParser.from_str(string_data)
+
+    # Extract the first structure
+    stru = parser.get_structures()[0]
+
+    lattice = stru.lattice.matrix
+    positions = stru.frac_coords
+    numbers = np.array(stru.atomic_numbers)
+
+    # Extract the raw dictionary to manually map magnetic moments
+    cif_dict = parser.as_dict()
+    data_block = list(cif_dict.values())[0]
+
+    # Locate the magnetic moment tags specific to .mcif files
+    if '_atom_site_moment.label' in data_block:
+        labels = data_block.get('_atom_site_moment.label', [])
+        mx = data_block.get('_atom_site_moment.crystalaxis_x', [])
+        my = data_block.get('_atom_site_moment.crystalaxis_y', [])
+        mz = data_block.get('_atom_site_moment.crystalaxis_z', [])
+
+        # Create a mapping of atom labels to their [x, y, z] moments
+        mag_map = {}
+        for i in range(len(labels)):
+            mag_map[labels[i]] = [float(mx[i]), float(my[i]), float(mz[i])]
+
+        # Assign the correct magnetic moment to each site in the structure
+        magmoms_list = []
+        for site in stru:
+            symbol = site.specie.symbol
+            # Default to [0.0, 0.0, 0.0] if no moment is specified for the atom
+            magmoms_list.append(mag_map.get(symbol, [0.0, 0.0, 0.0]))
+
+        magmoms = np.array(magmoms_list)
+    else:
+        # Fallback array if no magnetic data exists
+        magmoms = np.zeros((len(stru), 3))
+
+    return lattice, positions, numbers, magmoms
 
 def find_spinspacegroup(mcif_file):
 	lattice, positions, numbers, magmoms = read_mcif(mcif_file)

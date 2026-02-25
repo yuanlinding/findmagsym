@@ -10,7 +10,7 @@ from pymatgen.io.cif import CifParser
 
 
 def read_mcif(mcif_file):
-	# Handle different file object types
+	# Handle different file object types to get string data
 	try:
 		# Try reading as uploaded file object (Streamlit)
 		if hasattr(mcif_file, 'getvalue'):
@@ -32,19 +32,60 @@ def read_mcif(mcif_file):
 	except Exception as e:
 		raise ValueError(f"Could not read MCIF file: {e}")
 
-	stru = Structure.from_str(string_data,"cif")
-	lattice = stru.lattice.matrix
-	positions = stru.frac_coords
-	numbers = np.array(stru.atomic_numbers)
+	# Try parsing with Structure.from_str first (works for most MCIF files)
+	try:
+		stru = Structure.from_str(string_data, "cif")
+		lattice = stru.lattice.matrix
+		positions = stru.frac_coords
+		numbers = np.array(stru.atomic_numbers)
 
-	# Handle magnetic moments
-	if 'magmom' in stru.site_properties:
-		magmoms = np.array([list(stru.site_properties['magmom'][i].moment) for i in range(stru.num_sites)])
-	else:
-		# Fallback to zeros if no magnetic moments found
-		magmoms = np.zeros((stru.num_sites, 3))
+		# Check if magnetic moments were parsed
+		if 'magmom' in stru.site_properties:
+			magmoms = np.array([list(stru.site_properties['magmom'][i].moment) for i in range(stru.num_sites)])
+		else:
+			magmoms = np.zeros((stru.num_sites, 3))
 
-	return lattice, positions, numbers, magmoms
+		return lattice, positions, numbers, magmoms
+
+	except Exception:
+		# Fallback to CifParser with manual moment mapping
+		parser = CifParser.from_str(string_data)
+		stru = parser.parse_structures()[0]
+
+		lattice = stru.lattice.matrix
+		positions = stru.frac_coords
+		numbers = np.array(stru.atomic_numbers)
+
+		cif_dict = parser.as_dict()
+		data_block = list(cif_dict.values())[0]
+
+		if '_atom_site_moment.label' in data_block:
+			labels = data_block.get('_atom_site_moment.label', [])
+			mx = data_block.get('_atom_site_moment.crystalaxis_x', [])
+			my = data_block.get('_atom_site_moment.crystalaxis_y', [])
+			mz = data_block.get('_atom_site_moment.crystalaxis_z', [])
+
+			# Parse values with uncertainties like '-3.6(2)' -> -3.6
+			def parse_value(val):
+				val_str = str(val)
+				if '(' in val_str:
+					return float(val_str.split('(')[0])
+				return float(val_str)
+
+			mag_map = {}
+			for i in range(len(labels)):
+				mag_map[labels[i]] = [parse_value(mx[i]), parse_value(my[i]), parse_value(mz[i])]
+
+			magmoms_list = []
+			for site in stru:
+				symbol = site.specie.symbol
+				magmoms_list.append(mag_map.get(symbol, [0.0, 0.0, 0.0]))
+
+			magmoms = np.array(magmoms_list)
+		else:
+			magmoms = np.zeros((len(stru), 3))
+
+		return lattice, positions, numbers, magmoms
 
 def read_mcif2(mcif_file):
     # Alternative parser using CifParser with manual moment mapping

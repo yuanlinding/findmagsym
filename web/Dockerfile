@@ -7,13 +7,11 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc g++ git \
     && rm -rf /var/lib/apt/lists/*
 
-# Build context must be repo root so we can copy cross-directory files.
-# On Render: Root Directory = . (repo root), Dockerfile Path = web/Dockerfile
-COPY web/requirements.txt requirements.txt
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY core.py .
-COPY web/app.py .
+COPY app.py .
 COPY msg_list.cvs .
 
 RUN adduser --disabled-password --gecos "" appuser
